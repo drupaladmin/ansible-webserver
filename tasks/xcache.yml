@@ -1,0 +1,7 @@
+  - name: install php5-xcache
+    action: apt pkg=php5-xcache state=latest update-cache=yes force=yes install_recommends=yes
+
+  - name: install xcache conf
+    action: copy src=files/xcache.ini dest=/etc/php5/conf.d/xcache.ini
+    notify:
+      - restart apache

@@ -1,0 +1,50 @@
+#
+# Apache
+#
+- name: restart apache
+  action: service name=apache2 state=restarted
+
+- name: reload apache
+  action: service name=apache2 state=reloaded
+
+# Varnish
+#
+- name: restart varnish
+  action: service name=varnish state=restarted
+
+# Memcached
+- name: restart memcached
+  action: service name=memcached state=restarted
+
+# vsftpd
+- name: restart vsftpd
+  action: service name=vsftpd state=restarted
+
+# MySQL
+- name: restart mysql
+  action: service name=mysql state=restarted
+
+# Nginx
+- name: restart nginx
+  action: service name=nginx state=restarted
+
+# Exim4
+- name: restart exim4
+  action: service name=exim4 state=restarted
+
+# sysctl -p
+- name: save sysctl
+  action: command sysctl -p
+#
+# make a new cache for the repo that has vcl-*
+#
+- name: refresh apt cache
+  action: apt update-cache=yes
+#
+# iptables
+#
+# - name: restart iptables
+#   action: service name=iptables state=restarted
+
+- name: restart php-fpm
+  action: service name=php5-fpm state=restarted

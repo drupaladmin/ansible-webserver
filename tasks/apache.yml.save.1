@@ -1,0 +1,52 @@
+  - name: ensure packages is at the latest version
+    action: apt pkg=apache2-mpm-prefork,php5,php-pear,php5-gd,php5-mysql,php5-memcached state=latest update-cache=yes force=yes install_recommends=yes
+
+  - name: create directories
+    action: file path=$item owner=$user group=$user state=directory
+    with_items:
+      - /home/${user}/domains
+      - /home/${user}/tmp
+
+  - name: create directories
+    action: file path=$item owner=$user group=www-data state=directory
+    with_items:
+      - /home/${user}/domains/${site}
+      - /home/${user}/domains/${site}/html
+      - /home/${user}/domains/${site}/logs
+
+  - name: change directory permissions
+    action: command /bin/chmod -R ug+s /home/${user}/domains/${site}/html
+
+  - name: change directory permissions
+    action: command /bin/chmod 777 /home/${user}/tmp
+
+  - name: add user to group
+    action: command /usr/sbin/addgroup $user www-data
+
+# Setup Apache2 configuration
+  - name: enable mod_rewrite
+    action: command /usr/sbin/a2enmod rewrite
+    notify:
+      - reload apache
+  - name: install apache2.conf
+    action: copy src=files/apache2.conf dest=/etc/apache2/apache2.conf
+    notify:
+      - reload apache
+  - name: update envvars
+    action: copy src=files/envvars dest=/etc/apache2/envvars
+    notify:
+      - restart apache
+  - name: install apache2 ports.conf
+    action: copy src=files/ports.conf dest=/etc/apache2/ports.conf
+    notify:
+      - reload apache
+  - name: install apache2 virtual hosts
+    action: copy src=files/$site dest=/etc/apache2/sites-available/$site
+    notify:
+      - reload apache
+  - name: activate apache2 virtual host
+    action: command /usr/sbin/a2ensite $site
+    notify:
+      - reload apache
+
+

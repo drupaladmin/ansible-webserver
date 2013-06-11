@@ -1,0 +1,13 @@
+  - name: install varnish
+    action: apt pkg=varnish state=latest update-cache=yes force=yes install_recommends=yes
+
+  - name: install varnish config
+    action: copy src=files/varnish dest=/etc/default/varnish
+    notify:
+      - restart varnish
+
+  - name: install default.vcl
+    action: copy src=files/default.vcl dest=/etc/varnish/default.vcl
+    notify:
+      - restart varnish
+

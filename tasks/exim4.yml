@@ -1,0 +1,9 @@
+  - name: install exim4
+    action: apt pkg=exim4 state=latest update-cache=yes force=yes install_recommends=yes
+
+#Setup exim4
+  - name: install exim4 config
+    action: copy src=files/update-exim4.conf.conf dest=/etc/exim4/update-exim4.conf.conf
+    notify:
+      - restart exim4
+

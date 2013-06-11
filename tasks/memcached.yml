@@ -1,0 +1,13 @@
+  - name: install memcached
+    action: apt pkg=memcached state=latest update-cache=yes force=yes install_recommends=yes
+
+  - name: install memcached.conf
+    action: template src=../../webserver/templates/etc-memcached-conf.j2 dest=/etc/memcached.conf
+    notify:
+     - restart memcached
+
+  - name: install php module memcached
+    action: template src=../../webserver/templates/etc-php5-conf-d-memcached-init.j2 dest=/etc/php5/conf.d/memcached.ini
+    notify:
+     - restart php5-fpm
+     - restart apache

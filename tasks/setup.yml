@@ -1,0 +1,36 @@
+  - name: ensure packages is at the latest version
+    action: apt pkg=rsync,atop,iotop state=latest update-cache=yes force=yes install_recommends=yes
+
+#install sysctl.conf
+  - name: install sysctl.conf
+    action: copy src=files/sysctl.conf dest=/etc/sysctl.conf
+    notify: 
+      - save sysctl
+
+  - name: create directories
+    action: file path=$item owner=$user group=$user state=directory
+    with_items:
+      - /home/${user}/domains
+      - /home/${user}/tmp
+
+  - name: create directories
+    action: file path=/home/${user}/domains/$item owner=$user group=www-data state=directory
+    with_items: ${sites}
+
+  - name: create directories
+    action: file path=/home/${user}/domains/$item/html owner=$user group=www-data state=directory
+    with_items: ${sites}
+
+  - name: create directories
+    action: file path=/home/${user}/domains/$item/logs owner=$user group=www-data state=directory
+    with_items: ${sites}
+
+  - name: change directory permissions
+    action: command /bin/chmod -R ug+s /home/${user}/domains/$item/html
+    with_items: ${sites}
+
+  - name: change directory permissions
+    action: command /bin/chmod 777 /home/${user}/tmp
+
+  - name: add user to group
+    action: command /usr/sbin/addgroup $user www-data

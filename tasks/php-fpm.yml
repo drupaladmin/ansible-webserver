@@ -1,0 +1,17 @@
+  - name: ensure packages is at the latest version
+    action: apt pkg=php5-fpm,php-pear,php5-gd,php5-mysql,php5-memcached state=latest update-cache=yes force=yes install_recommends=yes
+
+  - name: PHP-FPM config
+    action: template src=../../webserver/templates/etc-php5-fpm-php-ini.j2 dest=/etc/php5/fpm/php.ini
+    notify:
+     - restart php5-fpm
+
+  - name: PHP-FPM config
+    action: template src=../../webserver/templates/etc-php5-fpm-php-fpm-conf.j2 dest=/etc/php5/fpm/php-fpm.conf
+    notify:
+     - restart php5-fpm
+
+  - name: PHP-FPM config
+    action: template src=../../webserver/templates/etc-php5-fpm-pool-d-www-conf.j2 dest=/etc/php5/fpm/pool.d/www.conf
+    notify:
+     - restart php5-fpm

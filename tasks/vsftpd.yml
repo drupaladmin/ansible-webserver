@@ -1,0 +1,9 @@
+  - name: install vsftpd
+    action: apt pkg=vsftpd state=latest update-cache=yes force=yes install_recommends=yes
+
+#Setup vsftpd
+  - name: install vsftpd conf
+    action: copy src=files/vsftpd.conf dest=/etc/vsftpd.conf
+    notify:
+      - restart vsftpd
+

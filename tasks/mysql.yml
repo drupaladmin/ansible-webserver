@@ -1,0 +1,12 @@
+  - name: install mysql
+    action: apt pkg=mysql-server,mytop,python-mysqldb state=latest update-cache=yes force=yes install_recommends=yes
+
+  - name: MySQL | Set the root password.
+    action: mysql_user user=root password=$mysql_root_password host=localhost
+    notify:
+     - restart mysql
+
+  - name: Mysql Configuration file
+    action: template src=../../webserver/templates/etc-mysql-my-cnf.j2 dest=/etc/mysql/my.cnf
+    notify:
+     - restart mysql
