@@ -4,14 +4,14 @@
   - name: PHP-FPM config
     action: template src=../../webserver/templates/etc-php5-fpm-php-ini.j2 dest=/etc/php5/fpm/php.ini
     notify:
-     - restart php5-fpm
+     - restart php-fpm
 
   - name: PHP-FPM config
     action: template src=../../webserver/templates/etc-php5-fpm-php-fpm-conf.j2 dest=/etc/php5/fpm/php-fpm.conf
     notify:
-     - restart php5-fpm
+     - restart php-fpm
 
   - name: PHP-FPM config
     action: template src=../../webserver/templates/etc-php5-fpm-pool-d-www-conf.j2 dest=/etc/php5/fpm/pool.d/www.conf
     notify:
-     - restart php5-fpm
+     - restart php-fpm
