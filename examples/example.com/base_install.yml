@@ -1,0 +1,10 @@
+---
+- hosts: dev.maks-portal.ru
+  user: root
+  gather_facts: false
+  tasks:
+    - action: pip name=pyzmq state=present
+    - action: pip name=pyasn1
+    - action: pip name=PyCrypto
+    - action: pip name=python-keyczar
+

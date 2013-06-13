@@ -1,0 +1,24 @@
+---
+- hosts: dev.maks-portal.ru
+  user: root
+  vars:
+    user: webmaster
+    sites: 
+      - dev.maks-portal.ru
+      - test.maks-portal.ru
+  vars_files:
+    - vars/setup.yml
+  tasks:
+    - include: /home/initlab/ansible-repo/webserver/tasks/setup.yml
+    - include: /home/initlab/ansible-repo/webserver/tasks/nginx.yml
+    - include: /home/initlab/ansible-repo/webserver/tasks/mysql.yml
+    - include: /home/initlab/ansible-repo/webserver/tasks/memcached.yml
+    - include: /home/initlab/ansible-repo/webserver/tasks/vsftpd.yml
+    - include: /home/initlab/ansible-repo/webserver/tasks/exim4.yml
+    - include: /home/initlab/ansible-repo/webserver/tasks/apc.yml
+    - include: /home/initlab/ansible-repo/webserver/tasks/php-fpm.yml
+    - include: /home/initlab/ansible-repo/webserver/tasks/drush.yml
+    - include: tasks/mysql.yml
+    - include: tasks/nginx.yml
+  handlers:
+    - include: /home/initlab/ansible-repo/webserver/handlers/setup.yml

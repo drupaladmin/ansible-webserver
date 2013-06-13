@@ -1,0 +1,89 @@
+#Maks-portal
+#if ($http_user_agent ~* "android|blackberry|iphone|ipad|ipod|iemobile|opera mobile|palmos|webos|googlebot-mobile"){
+#add_header Set-Cookie mt_device=mobile;
+#}
+#if ($http_cookie ~* "mt_device=desktop" {
+#rewrite ^(.*)$ http://maks-portal.ru$1 redirect;
+#}
+#
+#if ($http_cookie ~* "mt_device=mobile" {
+#rewrite ^(.*)$ http://m.maks-portal.ru/$1 redirect;
+#}
+
+if ($http_host ~* "^www\.maks-portal\.ru$"){
+    rewrite ^(.*)$ http://maks-portal.ru$1 permanent;
+  }
+  if ($http_host ~* "^maks-portal\.contorra\.ru$"){
+    rewrite ^(.*)$ http://maks-portal.ru$1 permanent;
+  }
+  if ($http_host ~* "^www\.maks-portal\.contorra\.ru$"){
+    rewrite ^(.*)$ http://maks-portal.ru$1 permanent;
+  }
+  if ($http_host ~* "^www\.sochi-23\.ru$"){
+    rewrite ^(.*)$ http://maks-portal.ru$1 permanent;
+  }
+  if ($http_host ~* "^sochi-23\.ru$"){
+    rewrite ^(.*)$ http://maks-portal.ru$1 permanent;
+  }
+  if ($http_host ~* "^www\.maksportal\.ru$"){
+    rewrite ^(.*)$ http://maks-portal.ru$1 permanent;
+  }
+  if ($http_host ~* "^www\.maksportal\.com$"){
+    rewrite ^(.*)$ http://maks-portal.ru$1 permanent;
+  }
+  if ($http_host ~* "^www\.maks-portal\.com$"){
+    rewrite ^(.*)$ http://maks-portal.ru$1 permanent;
+  }
+  if ($http_host ~* "^maksportal\.ru$"){
+    rewrite ^(.*)$ http://maks-portal.ru$1 permanent;
+  }
+  if ($http_host ~* "^maksportal\.com$"){
+    rewrite ^(.*)$ http://maks-portal.ru$1 permanent;
+  }
+  if ($http_host ~* "^maks-portal\.com$"){
+    rewrite ^(.*)$ http://maks-portal.ru$1 permanent;
+  }
+  if ($http_host ~* "^sbc-sochi\.ru$"){
+    rewrite ^(.*)$ http://maks-portal.ru/sochinskii-delovoi-klub permanent;
+  }
+  if ($http_host ~* "^www\.sbc-sochi\.ru$"){
+    rewrite ^(.*)$ http://maks-portal.ru/sochinskii-delovoi-klub permanent;
+  }
+  if ($http_host ~* "^www\.xn----7sbb2bhbrhkgp\.xn--p1ai$"){
+    rewrite ^(.*)$ http://maks-portal.ru$1 permanent;
+  }
+  if ($http_host ~* "^xn----7sbb2bhbrhkgp\.xn--p1ai$"){
+    rewrite ^(.*)$ http://maks-portal.ru$1 permanent;
+  }
+  if ($http_host ~* "^www\.xn--80aa3afbogjgn\.xn--p1ai$"){
+    rewrite ^(.*)$ http://maks-portal.ru$1 permanent;
+  }
+  if ($http_host ~* "^xn--80aa3afbogjgn\.xn--p1ai$"){
+    rewrite ^(.*)$ http://maks-portal.ru$1 permanent;
+  }
+  if ($http_host ~* "^web-tv-sochi\.maks-portal\.ru$"){
+    rewrite ^(.*)$ http://maks-portal.ru/ru/web-tv/2 permanent;
+  }
+  if ($http_host ~* "^web-tv-sochi\.maks-portal\.ru$"){
+    rewrite ^(.*)$ http://maks-portal.ru/ru/web-tv/1 permanent;
+  }
+
+
+#maks-fm
+
+if ($http_host ~* "^www\.maks-fm\.ru$"){
+    rewrite ^(.*)$ http://maks-fm.ru$1 permanent;
+  }
+  if ($http_host ~* "^max-fm\.ru$"){
+    rewrite ^(.*)$ http://maks-fm.ru$1 permanent;
+  }
+  if ($http_host ~* "^www\.max-fm\.ru$"){
+    rewrite ^(.*)$ http://maks-fm.ru$1 permanent;
+  }
+  if ($http_host ~* "^www\.maks-fm.contorra\.ru$"){
+    rewrite ^(.*)$ http://maks-fm.ru$1 permanent;
+  }
+  if ($http_host ~* "^maks-fm.contorra\.ru$"){
+    rewrite ^(.*)$ http://maks-fm.ru$1 permanent;
+  }
+

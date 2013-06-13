@@ -1,0 +1,19 @@
+---
+- hosts: dev.maks-portal.ru
+  user: root
+  tasks:
+    - name: create user webmaster
+      action: user name=webmaster password=$1$SomeSalt$W6eifrRFAb370HTLfNzGL0 createhome=yes
+
+#sources.list
+#    - name: install repo
+#      action: apt_repository repo='deb http://nginx.org/packages/debian/ wheezy nginx'
+
+#    - name: install repo
+#      action: apt_repository repo='deb http://packages.dotdeb.org wheezy all'
+
+#  - name: MySQL | Set the root password.
+#    action: mysql_user name=root password=$mysql_root_password host=localhost
+#    notify:
+#     - restart mysql
+
