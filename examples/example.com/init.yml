@@ -3,7 +3,7 @@
   user: root
   tasks:
     - name: create user webmaster
-      action: user name=webmaster password=$1$SomeSalt$W6eifrRFAb370HTLfNzGL0 createhome=yes
+      action: user name=webmaster password=$1$SomeSalt$W6eiFAb370HTLfNzGL0 createhome=yes
 
 #sources.list
 #    - name: install repo

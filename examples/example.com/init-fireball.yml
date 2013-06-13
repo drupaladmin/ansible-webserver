@@ -1,7 +1,0 @@
----
-- hosts: dev.maks-portal.ru
-  user: root
-  gather_facts: false
-  tasks:
-    - action: fireball
-

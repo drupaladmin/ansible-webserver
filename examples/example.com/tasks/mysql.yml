@@ -1,6 +1,0 @@
- - name: create the MySQL maksportal database
-   action: mysql_db login_user=root login_password=$mysql_root_password  db=maksportal state=present
-
- - name: delete anonymous MySQL server user for localhost
-   action: mysql_user login_user=root login_password=$mysql_root_password user="maks" password="Najmlvh" priv=maksportal.*:ALL state="present"
-

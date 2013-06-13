@@ -1,6 +1,0 @@
-#copy  rewrites
-  - name: install nginx conf
-    action: copy src=files/etc-nginx-rewrites dest=/etc/nginx/rewrites
-    notify:
-      - restart nginx
-

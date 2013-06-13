@@ -4,8 +4,8 @@
   vars:
     user: webmaster
     sites: 
-      - dev.maks-portal.ru
-      - test.maks-portal.ru
+      - example.com
+      - dev.example.com
   vars_files:
     - vars/setup.yml
   tasks:
@@ -18,7 +18,5 @@
     - include: /home/initlab/ansible-repo/webserver/tasks/apc.yml
     - include: /home/initlab/ansible-repo/webserver/tasks/php-fpm.yml
     - include: /home/initlab/ansible-repo/webserver/tasks/drush.yml
-    - include: tasks/mysql.yml
-    - include: tasks/nginx.yml
   handlers:
     - include: /home/initlab/ansible-repo/webserver/handlers/setup.yml
