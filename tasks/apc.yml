@@ -1,8 +1,8 @@
   - name: install php-apc
-    action: apt pkg=php-apc state=latest update-cache=yes force=yes install_recommends=yes
+    action: apt pkg=php-apc default-release=$apt_default_release state=latest update-cache=yes force=yes install_recommends=yes
 
   - name: install apc.ini
-    action: template src=../../webserver/templates/etc-php5-mods-available-apc-ini.j2 dest=/etc/php5/mods-available/apc.ini
-    notify:
-     - restart php-fpm
-     - restart apache
+    action: template src=../../webserver/templates/etc-php5-mods-available-apc-ini.j2 dest=/etc/php5/conf.d/apc.ini
+#    notify:
+#     - restart php-fpm
+#     - restart apache

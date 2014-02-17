@@ -3,9 +3,11 @@
 #
 - name: restart apache
   action: service name=apache2 state=restarted
+  when: "'$php_processor' == 'apache'"
 
 - name: reload apache
   action: service name=apache2 state=reloaded
+  when: "'$php_processor' == 'apache'"
 
 # Varnish
 #
@@ -48,3 +50,4 @@
 
 - name: restart php-fpm
   action: service name=php5-fpm state=restarted
+  when: "'$php_processor' == 'php-fpm'"

@@ -1,5 +1,5 @@
   - name: ensure packages is at the latest version
-    action: apt pkg=php5-fpm,php-pear,php5-gd,php5-mysql,php5-memcached state=latest update-cache=yes force=yes install_recommends=yes
+    action: apt pkg=php5-fpm,php-pear,php5-gd,php5-mysql,php5-memcached default-release={{ apt_default_release }} state=latest update-cache=yes force=yes install_recommends=yes
 
   - name: PHP-FPM config
     action: template src=../../webserver/templates/etc-php5-fpm-php-ini.j2 dest=/etc/php5/fpm/php.ini

@@ -1,7 +1,12 @@
   - name: ensure packages is at the latest version
-    action: apt pkg=rsync,atop,iotop state=latest update-cache=yes force=yes install_recommends=yes
-
-#install sysctl.conf
+    action: apt pkg=rsync,atop,iotop,screen state=latest update-cache=yes force=yes install_recommends=yes
+    
+  - name: copy locale.gen for generating locale
+    action: copy src=files/etc_locale_gen dest=/etc/locale.gen
+    
+  - name: generating locales
+    command: /usr/sbin/locale-gen
+  
   - name: install sysctl.conf
     action: copy src=files/sysctl.conf dest=/etc/sysctl.conf
     notify: 
@@ -27,6 +32,10 @@
 
   - name: change directory permissions
     action: command /bin/chmod -R ug+s /home/${user}/domains/$item/html
+    with_items: ${sites}
+
+  - name: change directory permissions
+    action: command /bin/chmod -R ug+ws /home/${user}/domains/$item/logs
     with_items: ${sites}
 
   - name: change directory permissions

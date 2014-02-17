@@ -1,29 +1,41 @@
   - name: ensure packages is at the latest version
-    action: apt pkg=apache2-mpm-prefork,php5,php-pear,php5-gd,php5-mysql,php5-memcached state=latest update-cache=yes force=yes install_recommends=yes
+    action: apt pkg=apache2-mpm-prefork,php5,php-pear,php5-gd,php5-mysql,php5-memcached default-release={{ apt_default_release }} state=latest update-cache=yes force=yes install_recommends=yes
 
 # Setup Apache2 configuration
   - name: enable mod_rewrite
     action: command /usr/sbin/a2enmod rewrite
     notify:
       - reload apache
+      
   - name: install apache2.conf
-    action: copy src=files/apache2.conf dest=/etc/apache2/apache2.conf
+    action: template src=../../webserver/templates/etc-apache2-apache2.conf.j2 dest=/etc/apache2/apache2.conf
     notify:
       - reload apache
+      
   - name: update envvars
-    action: copy src=files/envvars dest=/etc/apache2/envvars
+    action: template src=../../webserver/templates/etc-apache2-envvars.j2 dest=/etc/apache2/envvars
     notify:
       - restart apache
+      
   - name: install apache2 ports.conf
-    action: copy src=files/ports.conf dest=/etc/apache2/ports.conf
+    action: template src=../../webserver/templates/etc-apache2-ports.conf.j2 dest=/etc/apache2/ports.conf
     notify:
       - reload apache
+      
+  - name: install apache2 default
+    action: template src=../../webserver/templates/etc-apache2-sites-available-default.j2 dest=/etc/apache2/sites-available/default
+    notify:
+      - reload apache
+            
   - name: install apache2 virtual hosts
-    action: copy src=files/$site dest=/etc/apache2/sites-available/$site
+    action: copy src=files/etc-apache2-sites-available-$item dest=/etc/apache2/sites-available/$item
+    with_items: ${sites}
     notify:
       - reload apache
+      
   - name: activate apache2 virtual host
-    action: command /usr/sbin/a2ensite $site
+    action: command /usr/sbin/a2ensite $item
+    with_items: ${sites}
     notify:
       - reload apache
 

@@ -7,13 +7,8 @@
       - restart nginx
 
   - name: install nginx conf
-    action: copy src=files/nginx_$item dest=/etc/nginx/conf.d/$item
+    action: copy src=files/nginx_$item dest=/etc/nginx/conf.d/$item.conf
     with_items: ${sites}
     notify:
       - restart nginx
-
-#  - name: enable nginx conf
-#    action: file src=/etc/nginx/sites-available/$item dest=/etc/nginx/sites-enabled/$item state=link
-#    with_items: ${sites}
-#    notify:
-#      - restart nginx
+#    when: ansible_os_family == "Debian" and ansible_lsb.major_release|int >= 7

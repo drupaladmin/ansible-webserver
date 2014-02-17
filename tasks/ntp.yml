@@ -1,0 +1,8 @@
+  - name: install ntp
+    action: apt pkg=ntp,ntpdate state=latest update-cache=yes force=yes install_recommends=yes
+
+  - name: configure ntp   
+    command: echo "{{ server_timezone }}" > /etc/timezone
+
+  - name: reconfigure
+    command: dpkg-reconfigure -f noninteractive tzdata

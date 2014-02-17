@@ -7,7 +7,7 @@
      - restart memcached
 
   - name: install php module memcached
-    action: template src=../../webserver/templates/etc-php5-mods-available-memcached-ini.j2 dest=/etc/php5/mods-available/memcached.ini
+    action: template src=../../webserver/templates/etc-php5-mods-available-memcached-ini.j2 dest=/etc/php5/conf.d/memcached.ini
     notify:
      - restart php-fpm
      - restart apache

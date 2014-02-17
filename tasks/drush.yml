@@ -5,7 +5,7 @@
 # Ubuntu only due to using apt.
 #
 - name: Drush | Install PHP PEAR
-  action: apt pkg=php-pear state=installed
+  action: apt pkg=php-pear state=installed default-release=$apt_default_release
 
 - name: Drush | Update PEAR
   action: command pear upgrade-all

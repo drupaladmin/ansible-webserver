@@ -26,7 +26,15 @@ http {
 
     keepalive_timeout  65;
 
-    #gzip  on;
+    gzip  on;
+    gzip_min_length  1000;
+
+    gzip_proxied     any;
+    gzip_types text/plain text/xml application/xml application/x-javascript text/javascript text/css text/json;
+
+    gzip_disable     "msie6";
+
+    gzip_comp_level  5;
 
     include /etc/nginx/conf.d/*.conf;
 }
