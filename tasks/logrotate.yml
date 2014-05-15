@@ -1,0 +1,8 @@
+  - name: install logrotate
+    action: apt pkg=logrotate state=latest update-cache=yes force=yes install_recommends=yes
+
+  - name: install logrotate for apache  
+    action: template src=../../webserver/templates/etc-logrotate.d-ansible_apache.j2 dest=/etc/logrotate.d/ansible_apache
+    
+  - name: install logrotate for nginx  
+    action: template src=../../webserver/templates/etc-logrotate.d-ansible_nginx.j2 dest=/etc/logrotate.d/ansible_nginx
