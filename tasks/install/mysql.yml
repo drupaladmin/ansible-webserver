@@ -5,7 +5,7 @@
     action: service name=mysql state=started
 
   - name: MySQL | Set the root password.
-    action: mysql_user name=root password={{ mysql_root_password }} host=$item
+    action: mysql_user name=root password={{ mysql_root_password }} host={{item}}
     with_items:
       - $ansible_hostname
       - 127.0.0.1
@@ -27,7 +27,7 @@
     action: mysql_db db=test state=absent
 
   - name: Create databases
-    action: mysql_db name=$item state=present
+    action: mysql_db name={{item}} state=present
     with_items: ${databases}
 
   - name: Create users
