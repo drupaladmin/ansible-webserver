@@ -13,7 +13,7 @@
       - save sysctl
 
   - name: create directories
-    action: file path=$item owner=$user group=$user state=directory
+    action: file path={{item}} owner=$user group=$user state=directory
     with_items:
       - /home/${user}/domains
       - /home/${user}/tmp

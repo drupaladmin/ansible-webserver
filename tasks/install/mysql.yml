@@ -18,7 +18,7 @@
     template: src=../../webserver/templates/root-my-cnf.j2 dest=/root/.my.cnf owner=root mode=0600
 
   - name: delete anonymous MySQL server user for server_hostname
-    action: mysql_user host="$ansible_hostname" user="" state="absent"
+    action: mysql_user host="{{ansible_hostname}}" user="" state="absent"
 
   - name: delete anonymous MySQL server user for localhost
     action: mysql_user user="" state="absent"
