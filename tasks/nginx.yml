@@ -7,8 +7,8 @@
       - restart nginx
 
   - name: install nginx conf
-    action: copy src=files/nginx_$item dest=/etc/nginx/conf.d/$item.conf
-    with_items: ${sites}
+    action: copy src=files/nginx_{{item}} dest=/etc/nginx/conf.d/{{item}}.conf
+    with_items: sites
     notify:
       - restart nginx
 #    when: ansible_os_family == "Debian" and ansible_lsb.major_release|int >= 7
