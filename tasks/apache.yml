@@ -28,15 +28,13 @@
       - reload apache
             
   - name: install apache2 virtual hosts
-    action: copy src=files/etc-apache2-sites-available-$item dest=/etc/apache2/sites-available/$item
-    with_items: ${sites}
+    action: copy src=files/etc-apache2-sites-available-{{item}} dest=/etc/apache2/sites-available/{{item}}
+    with_items: sites
     notify:
       - reload apache
       
   - name: activate apache2 virtual host
-    action: command /usr/sbin/a2ensite $item
-    with_items: ${sites}
+    action: command /usr/sbin/a2ensite {{item}}
+    with_items: sites
     notify:
       - reload apache
-
-
