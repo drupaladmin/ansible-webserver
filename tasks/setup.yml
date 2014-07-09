@@ -27,7 +27,7 @@
     with_items: sites
 
   - name: create directories
-    action: file path=/home/{{user}}/domains/{{item}}/logs owner={{user}} group=www-data state=directory
+    action: file path=/home/{{user}}/domains/{{item}}/logs owner=www-data group=root state=directory
     with_items: sites
 
   - name: change directory permissions

@@ -5,9 +5,9 @@
         compress
         delaycompress
         notifempty
-        create 640 webmaster webmaster
+        create 664 www-data root
         sharedscripts
         postrotate
-            [ ! -f /var/run/nginx.pid ] || kill -USR1 `cat /var/run/nginx.pid`
+            [ ! -f /var/run/nginx.pid ] || kill -HUP `cat /var/run/nginx.pid`
         endscript
 }
