@@ -30,14 +30,14 @@
   - name: install apache2 virtual hosts
     action: copy src=files/etc-apache2-sites-available-{{item}} dest=/etc/apache2/sites-available/{{item}}
     with_items: sites
-    when: ansible_os_family == "Debian"
+    when: ansible_distribution == "Debian"
     notify:
       - reload apache
 
   - name: install apache2 virtual hosts
     action: copy src=files/etc-apache2-sites-available-{{item}} dest=/etc/apache2/sites-available/{{item}}.conf
     with_items: sites
-    when: ansible_os_family == "Ubuntu"
+    when: ansible_distribution == "Ubuntu"
     notify:
       - reload apache
 
