@@ -30,8 +30,17 @@
   - name: install apache2 virtual hosts
     action: copy src=files/etc-apache2-sites-available-{{item}} dest=/etc/apache2/sites-available/{{item}}
     with_items: sites
+    when: ansible_os_family == "Debian"
     notify:
       - reload apache
+
+  - name: install apache2 virtual hosts
+    action: copy src=files/etc-apache2-sites-available-{{item}} dest=/etc/apache2/sites-available/{{item}}.conf
+    with_items: sites
+    when: ansible_os_family == "Ubuntu"
+    notify:
+      - reload apache
+
       
   - name: activate apache2 virtual host
     action: command /usr/sbin/a2ensite {{item}}
